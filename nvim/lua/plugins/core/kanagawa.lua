@@ -27,13 +27,16 @@ return {
         PmenuThumb = { bg = theme.ui.bg_p2 },
 
         BlinkCmpMenuBorder = { link = 'FloatBorder' },
+
+        DiffChange = { bg = 'none' },
+
+        LineNr = { fg = '#7C7C99' },
+        StatusLine = { bg = 'none' },
+        StatusLineNC = { bg = 'none' },
       }
     end,
   },
   init = function()
     vim.cmd 'colorscheme kanagawa'
-    vim.api.nvim_set_hl(0, 'LineNr', { fg = '#7C7C99', bg = 'none' })
-    vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'none' })
-    vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = 'none' })
   end,
 }

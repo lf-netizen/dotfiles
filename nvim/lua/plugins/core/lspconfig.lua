@@ -89,17 +89,23 @@ return {
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       local servers = {
-        basedpyright = {
-          -- Apparently not needed
-          -- cmd = { 'uv', 'run', 'basedpyright-langserver', '--stdio' },
+        -- basedpyright = {
+        --   -- Apparently not needed
+        --   -- cmd = { 'uv', 'run', 'basedpyright-langserver', '--stdio' },
+        --   settings = {
+        --     disableOrganizeImports = true,
+        --     basedpyright = {
+        --       analysis = { ignore = '*' },
+        --       autoSearchPaths = true,
+        --       typeCheckingMode = 'basic',
+        --       diagnosticMode = 'openFilesOnly',
+        --     },
+        --   },
+        -- },
+
+        ty = {
           settings = {
-            disableOrganizeImports = true,
-            basedpyright = {
-              analysis = { ignore = '*' },
-              autoSearchPaths = true,
-              typeCheckingMode = 'basic',
-              diagnosticMode = 'openFilesOnly',
-            },
+            ty = {},
           },
         },
         ruff = {},
@@ -119,6 +125,9 @@ return {
             },
           },
         },
+
+        biome = {},
+        vtsls = {},
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})

@@ -1,6 +1,21 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 
---
+wezterm.on("augment-command-palette", function(window, pane)
+	local items = {}
+	local tabs = window:mux_window():tabs_with_info()
+
+	for _, item in ipairs(tabs) do
+		table.insert(items, {
+			brief = "Switch to tab: " .. item.tab:get_title(),
+			icon = "md_tab", -- Requires Nerd Fonts
+			action = act.ActivateTab(item.index),
+		})
+	end
+
+	return items
+end)
+
 local config = {
 	color_scheme = "Kanagawa (Gogh)",
 
@@ -39,7 +54,7 @@ local config = {
 	},
 
 	max_fps = 120,
-	enable_tab_bar = false,
+	-- enable_tab_bar = false,
 	cursor_blink_rate = 0,
 
 	window_decorations = "RESIZE",
@@ -61,6 +76,26 @@ local config = {
 		{ key = "|", mods = "CTRL|SHIFT", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ key = "_", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{ key = "w", mods = "CTRL|SHIFT", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
+		{
+			key = "r",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.PromptInputLine({
+				description = "Enter new name for tab",
+				action = wezterm.action_callback(function(window, pane, line)
+					-- line will be nil if they hit Escape without entering anything
+					if line then
+						window:active_tab():set_title(line)
+					end
+				end),
+			}),
+		},
+		{
+			key = "f",
+			mods = "CTRL|SHIFT",
+			-- WezTerm has a built-in fuzzy finder specifically for tabs!
+			-- action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|TABS" }),
+			action = wezterm.action.ActivateCommandPalette,
+		},
 	},
 }
 
@@ -80,5 +115,70 @@ smart_splits.apply_to_config(config, {
 local modal = wezterm.plugin.require("https://github.com/MLFlexer/modal.wezterm")
 modal.apply_to_config(config)
 modal.set_default_keys(config)
+
+wezterm.on("modal.enter", function(name, window, pane)
+	modal.set_right_status(window, name)
+	modal.set_window_title(pane, name)
+end)
+
+wezterm.on("modal.exit", function(name, window, pane)
+	window:set_right_status("")
+	modal.reset_window_title(pane)
+end)
+
+local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
+workspace_switcher.zoxide_path = "/opt/homebrew/bin/zoxide"
+workspace_switcher.apply_to_config(config)
+
+table.insert(config.keys, {
+	key = "s",
+	mods = "CTRL|SHIFT",
+	action = workspace_switcher.switch_workspace(),
+})
+
+local agent_deck = wezterm.plugin.require("https://github.com/Eric162/wezterm-agent-deck")
+agent_deck.apply_to_config(config, {
+	update_interval = 500, -- ms between status checks
+
+	colors = {
+		working = "#A6E22E", -- green: agent processing
+		waiting = "#E6DB74", -- yellow: needs input
+		idle = "#66D9EF", -- blue: ready
+		inactive = "#888888", -- gray: no agent
+	},
+
+	icons = {
+		style = "unicode", -- or 'nerd', 'emoji'
+		unicode = { working = "●", waiting = "◔", idle = "○", inactive = "◌" },
+	},
+
+	notifications = {
+		enabled = true,
+		on_waiting = true,
+		backend = "terminal-notifier", -- or 'native' (default)
+		terminal_notifier = {
+			sound = "default", -- or 'Ping', 'Glass', 'Funk', etc.
+			title = "WezTerm Agent Deck", -- notification title
+			activate = true, -- focus WezTerm when notification clicked
+		},
+	},
+})
+
+config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = false
+
+config.window_frame = {
+	active_titlebar_bg = "none",
+	inactive_titlebar_bg = "none",
+}
+
+config.colors = {
+	tab_bar = {
+		background = "none",
+		active_tab = { bg_color = "none", fg_color = "#c8c093" },
+		inactive_tab = { bg_color = "none", fg_color = "#727169" },
+		new_tab = { bg_color = "none", fg_color = "#727169" },
+	},
+}
 
 return config

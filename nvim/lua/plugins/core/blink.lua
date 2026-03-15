@@ -27,6 +27,7 @@ return {
               require('luasnip.loaders.from_vscode').lazy_load()
             end,
           },
+          -- { 'fang2hou/blink-copilot' },
         },
         opts = {},
       },
@@ -63,6 +64,16 @@ return {
         ['<C-j>'] = { 'select_next', 'fallback_to_mappings' },
         -- ['K'] = { 'show_signature', 'hide_signature', 'fallback' },
         ['<Tab>'] = {
+          -- function()
+          --   if require('copilot.suggestion').is_visible() then
+          --     require('copilot.suggestion').accept()
+          --   end
+          -- end,
+          -- function()
+          --   if require('sidekick').nes_jump_or_apply() then
+          --     return require('sidekick.nes').apply()
+          --   end
+          -- end,
           function(cmp)
             if cmp.snippet_active() then
               return cmp.accept()
@@ -82,7 +93,18 @@ return {
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = true, auto_show_delay_ms = 500 },
 
+        ghost_text = {
+          enabled = true,
+        },
+        list = {
+          selection = {
+            auto_insert = true,
+            preselect = true,
+          },
+        },
+
         menu = {
+          auto_show = true,
           draw = {
             -- We don't need label_description now because label and label_description are already
             -- combined together in label by colorful-menu.nvim.
@@ -102,9 +124,15 @@ return {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'lsp', 'path', 'snippets', 'lazydev' }, -- add 'copilot' if you want to use it
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          -- copilot = {
+          --   name = 'copilot',
+          --   module = 'blink-copilot',
+          --   score_offset = 100,
+          --   async = true,
+          -- },
         },
       },
 

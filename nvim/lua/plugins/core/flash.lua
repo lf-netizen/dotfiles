@@ -13,7 +13,6 @@ return {
   },
   config = function(_, opts)
     require('flash').setup(opts)
-
     -- FlashBackdrop with terminal support
     vim.api.nvim_set_hl(0, 'FlashBackdrop', {
       italic = true,
