@@ -2,7 +2,6 @@ require('lazy').setup({
 
   { import = 'plugins.core' }, -- aka just for editing / navigation. Can use Ctrl.
   { import = 'plugins.addons' }, -- aka the rest. Uses leader as base.
-  -- { import = 'plugins.ai' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

@@ -1,21 +1,6 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-wezterm.on("augment-command-palette", function(window, pane)
-	local items = {}
-	local tabs = window:mux_window():tabs_with_info()
-
-	for _, item in ipairs(tabs) do
-		table.insert(items, {
-			brief = "Switch to tab: " .. item.tab:get_title(),
-			icon = "md_tab", -- Requires Nerd Fonts
-			action = act.ActivateTab(item.index),
-		})
-	end
-
-	return items
-end)
-
 local config = {
 	color_scheme = "Kanagawa (Gogh)",
 
@@ -72,6 +57,7 @@ local config = {
 	-- disable_default_key_bindings = true,
 	enable_kitty_keyboard = true,
 	keys = {
+		{ key = "Enter", mods = "SHIFT", action = wezterm.action({ SendString = "\x1b\r" }) }, -- for newlines in Claude Code
 		{ key = "Tab", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
 		{ key = "|", mods = "CTRL|SHIFT", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ key = "_", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
@@ -93,8 +79,7 @@ local config = {
 			key = "f",
 			mods = "CTRL|SHIFT",
 			-- WezTerm has a built-in fuzzy finder specifically for tabs!
-			-- action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|TABS" }),
-			action = wezterm.action.ActivateCommandPalette,
+			action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|TABS" }),
 		},
 	},
 }
@@ -136,33 +121,33 @@ table.insert(config.keys, {
 	action = workspace_switcher.switch_workspace(),
 })
 
-local agent_deck = wezterm.plugin.require("https://github.com/Eric162/wezterm-agent-deck")
-agent_deck.apply_to_config(config, {
-	update_interval = 500, -- ms between status checks
-
-	colors = {
-		working = "#A6E22E", -- green: agent processing
-		waiting = "#E6DB74", -- yellow: needs input
-		idle = "#66D9EF", -- blue: ready
-		inactive = "#888888", -- gray: no agent
-	},
-
-	icons = {
-		style = "unicode", -- or 'nerd', 'emoji'
-		unicode = { working = "●", waiting = "◔", idle = "○", inactive = "◌" },
-	},
-
-	notifications = {
-		enabled = true,
-		on_waiting = true,
-		backend = "terminal-notifier", -- or 'native' (default)
-		terminal_notifier = {
-			sound = "default", -- or 'Ping', 'Glass', 'Funk', etc.
-			title = "WezTerm Agent Deck", -- notification title
-			activate = true, -- focus WezTerm when notification clicked
-		},
-	},
-})
+-- local agent_deck = wezterm.plugin.require("https://github.com/Eric162/wezterm-agent-deck")
+-- agent_deck.apply_to_config(config, {
+-- 	update_interval = 500, -- ms between status checks
+--
+-- 	colors = {
+-- 		working = "#A6E22E", -- green: agent processing
+-- 		waiting = "#E6DB74", -- yellow: needs input
+-- 		idle = "#66D9EF", -- blue: ready
+-- 		inactive = "#888888", -- gray: no agent
+-- 	},
+--
+-- 	icons = {
+-- 		style = "unicode", -- or 'nerd', 'emoji'
+-- 		unicode = { working = "●", waiting = "◔", idle = "○", inactive = "◌" },
+-- 	},
+--
+-- 	notifications = {
+-- 		enabled = true,
+-- 		on_waiting = true,
+-- 		backend = "terminal-notifier", -- or 'native' (default)
+-- 		terminal_notifier = {
+-- 			sound = "default", -- or 'Ping', 'Glass', 'Funk', etc.
+-- 			title = "WezTerm Agent Deck", -- notification title
+-- 			activate = true, -- focus WezTerm when notification clicked
+-- 		},
+-- 	},
+-- })
 
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
