@@ -1,0 +1,108 @@
+{
+    // Use the existing Neovim integration; avoid two Vim engines.
+    "vim.disableExtension": true,
+    "workbench.iconTheme": "material-icon-theme",
+
+    "editor.fontVariations": false,
+    "editor.fontFamily": "JetBrains Mono, 'Apple Color Emoji'",
+    "editor.fontSize": 14,
+    "editor.lineNumbers": "relative",
+    "editor.stickyScroll.enabled": false,
+    "editor.cursorSurroundingLines": 8,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "editor.minimap.enabled": false,
+    "files.autoSave": "afterDelay",
+    "files.exclude": {
+        "**/.venv": true
+    },
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "notebook.formatOnSave.enabled": true,
+    "jupyter.askForKernelRestart": false,
+    "jupyter.interactiveWindow.textEditor.executeSelection": true,
+    "jupyter.interactiveWindow.creationMode": "single",
+    "jupyter.interactiveWindow.notebookRepl": true,
+
+    "github.copilot.selectedCompletionModel": "gpt-4o-copilot",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+
+    // Some sort of neovim issue fix https://github.com/vscode-neovim/vscode-neovim/issues/2099#issuecomment-2657736422
+    "workbench.view.showQuietly": {
+        "workbench.panel.output": true
+    },
+    "multiCommand.commands": [
+        {
+            "command": "multiCommand.pageUp",
+            "sequence": [
+                {
+                    "command": "vscode-neovim.send",
+                    "args": "<C-u>"
+                },
+                {
+                    "command": "vscode-neovim.send",
+                    "args": "z"
+                },
+                {
+                    "command": "vscode-neovim.send",
+                    "args": "z"
+                }
+            ]
+        },
+        {
+            "command": "multiCommand.pageDown",
+            "sequence": [
+                {
+                    "command": "vscode-neovim.send",
+                    "args": "<C-d>"
+                },
+                {
+                    "command": "vscode-neovim.send",
+                    "args": "z"
+                },
+                {
+                    "command": "vscode-neovim.send",
+                    "args": "z"
+                }
+            ]
+        }
+    ],
+    // End of Neovim settings
+
+    "markdown.suggest.paths.enabled": false,
+    "markdown.preview.breaks": true,
+
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "ruff.lineLength": 100,
+    "remote.autoForwardeortsSource": "hybrid",
+    // The extension version was 1.18.9
+    "notebook.lineNumbers": "on",
+    "workbench.colorCustomizations": {
+        // "editor.background": "#00000000"
+    },
+    "window.titleBarStyle": "custom",
+    "workbench.colorTheme": "Kanagawa",
+
+    "vscode_vibrancy.opacity": 0.1,
+    "json.schemaDownload.trustedDomains": {
+        "https://schemastore.azurewebsites.net/": true,
+        "https://raw.githubusercontent.com/": true,
+        "https://www.schemastore.org/": true,
+        "https://json.schemastore.org/": true,
+        "https://json-schema.org/": true,
+        "https://biomejs.dev": true
+    },
+    "explorer.confirmPasteNative": false
+}

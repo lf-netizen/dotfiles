@@ -1,0 +1,68 @@
+{
+  "claude": {
+    "frontend-design@claude-plugins-official": [
+      {
+        "scope": "user",
+        "version": "85cce0381e78",
+        "gitCommitSha": "cac84f53c5792ae787936c91c4d0731cc23d0660"
+      }
+    ],
+    "code-simplifier@claude-plugins-official": [
+      {
+        "scope": "user",
+        "version": "1.0.0",
+        "gitCommitSha": "31e7200b33db954ec45cae5dd1bed9bd6611bbe3"
+      }
+    ],
+    "context7@claude-plugins-official": [
+      {
+        "scope": "user",
+        "version": "85cce0381e78",
+        "gitCommitSha": "cac84f53c5792ae787936c91c4d0731cc23d0660"
+      }
+    ]
+  },
+  "codex": [
+    {
+      "name": "openai-templates",
+      "metadata": {
+        "schema_version": 1,
+        "remote_plugin_id": "plugin_connector_1p_2330815c823c8191941e5dc465bb899f"
+      }
+    },
+    {
+      "name": "plugin-management",
+      "metadata": {
+        "schema_version": 1,
+        "remote_plugin_id": "plugin_connector_1p_b3438d6beb9081918fba3625bc988128"
+      }
+    },
+    {
+      "name": "deep-research-work",
+      "metadata": {
+        "schema_version": 1,
+        "remote_plugin_id": "plugin_connector_1p_ae06492f57648191bd558c9c45188734"
+      }
+    }
+  ],
+  "herdr": [
+    "pi: not installed (~/.pi/agent/extensions/herdr-agent-state.ts)",
+    "omp: current (v8) (~/.omp/agent/extensions/herdr-omp-agent-state.ts)",
+    "claude: current (v8) (~/.claude/hooks/herdr-agent-state.sh)",
+    "codex: current (v8) (~/.codex/herdr-agent-state.sh)",
+    "copilot: not installed (~/.copilot/hooks/herdr-agent-state.sh)",
+    "devin: not installed (~/.config/devin/herdr-agent-state.sh)",
+    "droid: not installed (~/.factory/hooks/herdr-agent-state.sh)",
+    "kimi: not installed (~/.kimi-code/hooks/herdr-agent-state.sh)",
+    "opencode: not installed (~/.config/opencode/plugins/herdr-agent-state.js)",
+    "kilo: not installed (~/.config/kilo/plugin/herdr-agent-state.js)",
+    "hermes: not installed (~/.hermes/plugins/herdr-agent-state/__init__.py)",
+    "qodercli: not installed (~/.qoder/hooks/herdr-agent-state.sh)",
+    "qwen: not installed (~/.qwen/hooks/herdr-agent-session.sh)",
+    "cursor: not installed (~/.cursor/herdr-agent-state.sh)",
+    "mastracode: not installed (~/.mastracode/hooks/herdr-agent-state.sh)",
+    "antigravity-cli: not installed (~/.gemini/config/hooks/herdr-agent-state.sh)",
+    "grok: not installed (~/.grok/hooks/herdr-agent-state.sh)"
+  ],
+  "claude_marketplace": "https://github.com/anthropics/claude-plugins-official"
+}

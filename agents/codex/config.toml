@@ -1,0 +1,42 @@
+approvals_reviewer = "user"
+model = "gpt-6-astra"
+model_reasoning_effort = "medium"
+plan_mode_reasoning_effort = "high"
+
+[features]
+hooks = true
+  prevent_idle_sleep = true
+
+[mcp_servers]
+  [mcp_servers.playwright]
+    args = ["@playwright/mcp@latest"]
+    command = "npx"
+    [mcp_servers.playwright.tools]
+      [mcp_servers.playwright.tools.browser_click]
+        approval_mode = "approve"
+      [mcp_servers.playwright.tools.browser_close]
+        approval_mode = "approve"
+      [mcp_servers.playwright.tools.browser_evaluate]
+        approval_mode = "approve"
+      [mcp_servers.playwright.tools.browser_navigate]
+        approval_mode = "approve"
+      [mcp_servers.playwright.tools.browser_resize]
+        approval_mode = "approve"
+      [mcp_servers.playwright.tools.browser_run_code]
+        approval_mode = "approve"
+      [mcp_servers.playwright.tools.browser_type]
+        approval_mode = "approve"
+
+[notice]
+  [notice.model_migrations]
+    "gpt-5.1-codex-mini" = "gpt-5.4"
+    "gpt-5.3-codex" = "gpt-5.4"
+
+[tui]
+  notifications = false
+  status_line = ["model-with-reasoning", "context-remaining", "current-dir", "five-hour-limit", "weekly-limit", "context-window-size", "used-tokens", "total-input-tokens", "total-output-tokens"]
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+"gpt-5.6-sol" = 2
+gpt-6-astra = 4

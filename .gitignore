@@ -1,4 +1,14 @@
 .DS_Store
-github-copilot/
-karabiner/automatic_backups/
-uv/
+*.local
+.env*
+*.log
+*.sqlite*
+*.db*
+auth.json
+**/sessions/
+**/cache/
+raycast/*.rayconfig
+!raycast/settings.rayconfig
+__pycache__/
+*.pyc
+.zcompdump*

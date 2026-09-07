@@ -1,0 +1,12 @@
+# Small restore set for the preserved settings and shortcuts.
+asvetliakov.vscode-neovim
+ryuta46.multi-command
+tobias-z.vscode-harpoon
+qufiwefefwoyn.kanagawa
+pkief.material-icon-theme
+esbenp.prettier-vscode
+charliermarsh.ruff
+ms-python.python
+ms-python.vscode-pylance
+ms-toolsai.jupyter
+tamasfe.even-better-toml
