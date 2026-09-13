@@ -20,6 +20,30 @@ enabled entries are frontend-design, code-simplifier and context7. The inventory
 records their versions. Reinstall from that marketplace when restoring on a new
 machine, then verify availability in Claude's plugin UI.
 
+## OMP model roles
+
+`omp/config.yml` separates main coding from lightweight helpers:
+
+| Role | Model | Reasoning effort |
+| --- | --- | --- |
+| `default`, `vision` | GPT-6 Astra | `medium` |
+| `slow`, `plan` | GPT-6 Astra | `high` |
+| `smol` | GPT-5.6 Luna | `medium` |
+| `tiny` | GPT-5.3 Codex Spark | `low` |
+
+Luna handles general lightweight coding and research; Spark handles online
+background tasks such as titles and difficulty classification on its separate
+subscription quota. Main implementation stays on Astra. Prewalk remains at its
+built-in disabled default, so this does not automatically hand implementation
+to the smaller model.
+
+Use explicit provider/model/effort selectors: chained `plan: "@slow"` and
+`vision: "@default"` mappings did not resolve correctly in OMP 18.1.19.
+Start a new OMP session to use the deployed defaults.
+
+Selection references: [GPT-5.6 coding evaluations](https://openai.com/index/gpt-5-6/),
+[Codex Spark capabilities and limits](https://openai.com/index/introducing-gpt-5-3-codex-spark/).
+
 ## OMP subscription status
 
 `omp/config.yml` preserves the Claude-style composer and default status segments,
