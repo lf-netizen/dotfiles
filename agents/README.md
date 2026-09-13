@@ -1,8 +1,8 @@
 # Agent preservation
 
-The live agent homes remain `~/.claude` and `~/.codex`. Authentication,
-sessions, histories, SQLite databases, downloaded plugins and runtime-provided
-skills stay there. Their private backup is outside this repository.
+The live agent homes remain `~/.claude`, `~/.codex`, and `~/.omp/agent`.
+Authentication, sessions, histories, SQLite databases, downloaded plugins and
+runtime-provided skills stay there. Their private backup is outside this repository.
 
 Claude settings, instructions, the existing jq status line, enabled plugins and
 the personal graphify skill are preserved. Codex retains its model, effort,
@@ -19,6 +19,29 @@ Claude's marketplace is `anthropics/claude-plugins-official`; the preserved
 enabled entries are frontend-design, code-simplifier and context7. The inventory
 records their versions. Reinstall from that marketplace when restoring on a new
 machine, then verify availability in Claude's plugin UI.
+
+## OMP subscription status
+
+`omp/config.yml` preserves the Claude-style composer and default status segments,
+adding inline extension status after the session cost. The `agents` deployment
+slice copies this config and links `omp/codex-quota.ts` into OMP's extensions.
+Run `/reload` in existing OMP sessions after deployment; new sessions load it
+automatically.
+
+The quota extension displays the active Codex account's standard subscription
+windows as `5h 72% left · 7d 90% left`, including either window independently when
+available. Spark/model-specific pools, unknown amounts, expired windows, and
+other accounts are excluded. It hides outside the `openai-codex` provider.
+The built-in `usage` segment displays used percentages; this extension displays
+remaining percentages without replacing the rest of the status bar.
+
+It refreshes on startup, session switches, completed turns, and every minute,
+using OMP's shared usage cache rather than separate CLI processes or credentials.
+Fetch failures clear the indicator instead of presenting stale data as current.
+For the detailed report, use `omp usage --provider openai-codex`.
+Verified with OMP 18.1.19. Export deliberate OMP settings changes through the
+`agents` slice just like Claude/Codex settings; no usage reports or auth data
+belong in the repository.
 
 ## Herdr integrations
 

@@ -13,7 +13,7 @@ and application-owned runtime data; it is not another dotfiles repository.
 | `zsh`, `wezterm`, `herdr` | Shell, terminal host, and persistent workspace controls |
 | `nvim`, `vscode` | Current editors; VS Code shares Neovim's VS Code-specific branch |
 | `karabiner`, `raycast` | Modifier remaps and exported global shortcuts |
-| `agents` | Claude/Codex authored settings, instructions, and restore helpers' inventory |
+| `agents` | Claude/Codex/OMP authored settings, instructions, and restore helpers' inventory |
 | `bat`, `git`, `img` | Active theme, ignore rules, and terminal background |
 | `scripts` | Deployment, export/rollback, and integration/extension setup |
 | `docs` | Known issues and historical migration records |

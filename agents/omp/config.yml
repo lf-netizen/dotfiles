@@ -1,0 +1,26 @@
+setupVersion: 2
+modelRoles:
+  default: openai-codex/gpt-6-astra:xhigh
+display:
+  hideToolActivity: false
+composer:
+  shape: claude
+dev:
+  autoqaConsent: denied
+statusLine:
+  preset: custom
+  leftSegments: [pi, vim, model, mode, collab, path, git, pr, context_pct, cost, status]
+  rightSegments: [session_name]
+  showHookStatus: false
+  segmentOptions:
+    model:
+      showThinkingLevel: true
+    path:
+      abbreviate: true
+      maxLength: 40
+      stripWorkPrefix: true
+    git:
+      showBranch: true
+      showStaged: true
+      showUnstaged: true
+      showUntracked: true
