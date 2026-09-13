@@ -1,7 +1,7 @@
 # Personal dotfiles
 
-macOS: Raycast → WezTerm → Herdr → zsh, with the existing Powerlevel10k,
-Neovim, Karabiner, Claude Code and Codex setups.
+macOS: Raycast → WezTerm or Ghostty → Herdr → zsh, with the existing
+Powerlevel10k, Neovim, Karabiner, Claude Code and Codex setups.
 
 This checkout (`~/dotfiles`) is the source. `~/.config` contains deployed links
 and application-owned runtime data; it is not another dotfiles repository.
@@ -10,7 +10,7 @@ and application-owned runtime data; it is not another dotfiles repository.
 
 | Directory | Purpose |
 | --- | --- |
-| `zsh`, `wezterm`, `herdr` | Shell, terminal host, and persistent workspace controls |
+| `zsh`, `wezterm`, `ghostty`, `herdr` | Shell, terminal hosts, and persistent workspace controls |
 | `nvim`, `vscode` | Current editors; VS Code shares Neovim's VS Code-specific branch |
 | `karabiner`, `raycast` | Modifier remaps and exported global shortcuts |
 | `agents` | Claude/Codex/OMP authored settings, instructions, and restore helpers' inventory |
@@ -20,8 +20,8 @@ and application-owned runtime data; it is not another dotfiles repository.
 
 `symlinks.conf` is the deployment manifest. Neovim imports both `plugins/core`
 and `plugins/addons`; those files are active even without individual `require`
-statements. Old tmux, iTerm2, Agent Deck, and Ghostty configs live only in the
-private recovery archive.
+statements. Old tmux, iTerm2, and Agent Deck configs live only in the private
+recovery archive. Ghostty now has a maintained trial configuration.
 
 Neovim is an ordinary tracked directory, **not a submodule**. Cloning needs no
 `--recursive` flag. Deployment symlinks `~/.config/nvim` to it; lazy.nvim installs
@@ -56,15 +56,15 @@ The intentional Karabiner Cmd/Ctrl swap is unchanged.
 | Ctrl+Shift+1–9 | Agent jump binding; affected by the known WezTerm input bug |
 | Ctrl+Shift+Tab | Return to the last pane |
 | Ctrl+Shift+W | Close the focused pane immediately |
-| Ctrl+Q | Quit WezTerm with confirmation |
+| Ctrl+Q | Quit the terminal host with confirmation |
 | Ctrl+Shift+P / S / Z | Navigator / sidebar / zoom |
-| Ctrl+Shift+C / V | Herdr copy mode / WezTerm paste |
+| Ctrl+Shift+C / V | Herdr copy mode / terminal host paste |
 | Ctrl+Cmd+= / - / 0 | Increase / decrease / reset font |
 | Ctrl+B, then ? | Herdr's native help and fallback bindings |
 
 Copy mode: `/` searches, `n` repeats, h/j/k/l moves, v starts a selection,
 y copies, Esc clears/exits. Tab switching uses Ctrl+Shift+comma / period;
-WezTerm forwards these as explicit Kitty key sequences to preserve modifiers.
+WezTerm forwards these as explicit Kitty key sequences; Ghostty encodes them natively.
 The former U/I and bracket tab bindings are removed. Ctrl+Shift+- is free.
 See [keyboard findings](docs/keyboard-issues.md).
 Reserve Alt+A/C/E/L/N/O/S/X/Z and shifted variants for Polish letters.
@@ -85,6 +85,40 @@ Machine-specific PATH entries live in the untracked `~/.zshrc.local`.
 `ls` restores the previous eza layout: icons, colours, Git status and compact
 rows, excluding `__pycache__`. `ls -a` includes hidden entries; `command ls`
 bypasses the alias. `ll` retains the system's detailed listing with hidden files.
+
+## Ghostty trial
+
+Ghostty 1.3.1+ is configured alongside WezTerm, not in place of it. Launch
+**Ghostty** from Raycast or Applications. Alt+T and the encrypted Raycast export
+still target WezTerm while evaluating the new host.
+
+Both hosts run `/opt/homebrew/bin/herdr`, attaching to the same default persistent
+session. Shells, tabs, panes, workspaces, agents, sidebar, copy mode and notifications
+remain Herdr-owned; no second set of terminal tabs or split shortcuts is added.
+Quit closes the terminal client, not Herdr's persistent jobs.
+
+`ghostty/config.ghostty` matches the 14 pt JetBrains Mono font and fallback order,
+disabled ligatures, Kanagawa (Gogh) ANSI colors, default non-blinking block cursor,
+zero padding, hidden titlebar, centered cover wallpaper, paste/font/quit shortcuts
+and close confirmation. Both Option keys retain Polish composition. Karabiner's
+Cmd/Ctrl swap now includes Ghostty on both sides.
+
+Ghostty has no WezTerm-style per-image HSB transform. Its tracked wallpaper is
+preprocessed from the original with saturation zero and brightness halved in
+linear RGB; Ghostty mixes it 50/50 with `#282c35` without desktop transparency.
+Regenerate it after changing the original (ImageMagick is needed only for this):
+
+```sh
+magick img/background.jpeg -colorspace RGB -fx 'max(r,max(g,b))*0.5' \
+  -colorspace sRGB -quality 95 img/ghostty-background.jpeg
+```
+
+Font rasterization and image blending can differ between renderers; pixel-identical
+appearance is not guaranteed. Ghostty uses display-synchronized rendering rather
+than WezTerm's configured 60 FPS cap. Its cursor setting is a default that terminal
+applications can override. macOS screen-capture permissions prevented a visual
+side-by-side check; native input and Herdr interaction checks passed.
+See [keyboard verification](docs/keyboard-issues.md#ghostty-131-trial).
 
 ## Deploy and maintain
 
@@ -128,9 +162,9 @@ trust records. Review credentials and other personal settings before committing:
 this normalization is not a general secret scrubber. Review hook trust normally
 on each machine. Origin is `https://github.com/lf-netizen/dotfiles` (SSH for pushing).
 
-Install Git, Powerlevel10k, fzf, zoxide, eza, Herdr, WezTerm, Neovim, LazyGit,
-LazySQL, bat, jq, Node.js/npm (for the Playwright MCP), Python 3.11+, Claude Code
-and Codex. Install JetBrains Mono and MesloLGS NF fonts. zsh-autosuggestions and zsh-syntax-highlighting
+Install Git, Powerlevel10k, fzf, zoxide, eza, Herdr, WezTerm, Ghostty 1.3.1+,
+Neovim, LazyGit, LazySQL, bat, jq, Node.js/npm (for the Playwright MCP), Python 3.11+,
+Claude Code and Codex. Install JetBrains Mono and MesloLGS NF fonts. zsh-autosuggestions and zsh-syntax-highlighting
 are sourced directly from Homebrew. There is no package manifest or bulk installer.
 See [agent preservation](agents/README.md) and [Raycast settings](raycast/README.md).
 The [VS Code companion editor](vscode/README.md) has preserved settings and
@@ -145,8 +179,10 @@ Run `bat cache --build` after deploying its theme. Open Neovim once to let lazy.
 install the locked plugins. Review `:checkhealth` for language tools you use.
 
 Release checks: `python3 scripts/test_deploy.py`, `zsh -n zsh/.zshrc`,
-`herdr config check`, and `wezterm show-keys --lua`. The known WezTerm numbered-key
-and bracket issues remain documented; this release does not claim to fix them.
+`herdr config check`, `wezterm show-keys --lua`, and
+`/Applications/Ghostty.app/Contents/MacOS/ghostty +validate-config`.
+The known WezTerm numbered-key and bracket issues remain documented; Ghostty
+uses native Kitty encoding rather than carrying those workarounds over.
 
 ## Recovery
 

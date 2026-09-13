@@ -13,7 +13,7 @@
 </style>
 </head>
 <body><main>
-<header><div><h1>Workflow keyboard reference</h1><p>macOS · Raycast / WezTerm / Herdr / zsh / Neovim</p></div><div class="edition">PERSONAL CONFIGURATION<br>13 SEPTEMBER 2026</div></header>
+<header><div><h1>Workflow keyboard reference</h1><p>macOS · Raycast / WezTerm or Ghostty / Herdr / zsh / Neovim</p></div><div class="edition">PERSONAL CONFIGURATION<br>13 SEPTEMBER 2026</div></header>
 <div class="legend"><span><b>Alt</b> &nbsp; Global navigation</span><span><b>Ctrl + Shift</b> &nbsp; Herdr + paste</span><span><b>Ctrl</b> &nbsp; Focused terminal app</span><span><b>Ctrl + Cmd</b> &nbsp; Font size</span><span><b>Cmd</b> &nbsp; GUI app actions</span></div>
 <p class="note">Terminal keys use the configured Ctrl/Cmd names after your intentional Karabiner swap. Alt = Option. “then” means release the first chord. Neovim leader = Space; uppercase letters require Shift.</p>
 <div class="toolbar"><input id="search" type="search" aria-label="Search shortcuts" placeholder="Search action, key or app…  / to focus" autocomplete="off"><button id="detail" aria-pressed="false">Full reference</button><button id="print">Print / PDF</button></div>
@@ -21,25 +21,25 @@
 <p class="count" id="count" role="status" aria-live="polite"></p>
 <div class="grid" id="reference"></div><p class="empty" id="empty" hidden>No matching shortcuts. Try “pane”, “copy”, “history” or “Ctrl Shift”.</p>
 <noscript>This reference needs JavaScript enabled to display its embedded shortcut list. No internet connection is needed.</noscript>
-<footer><p>Open anytime: <code>cheatsheet</code> in zsh, or bookmark this local page. <span class="screen-only">Press <kbd>/</kbd> to search; <kbd>Esc</kbd> clears search and filters.</span></p><p>Based on <a href="herdr/config.toml">Herdr</a>, <a href="wezterm/wezterm.lua">WezTerm</a>, <a href="zsh/.zshrc">zsh</a>, <a href="nvim/lua/keymaps.lua">Neovim</a> and <a href="raycast/README.md">global settings</a>. This is a maintained snapshot; app help includes context-specific and plugin bindings.</p></footer>
+<footer><p>Open anytime: <code>cheatsheet</code> in zsh, or bookmark this local page. <span class="screen-only">Press <kbd>/</kbd> to search; <kbd>Esc</kbd> clears search and filters.</span></p><p>Based on <a href="herdr/config.toml">Herdr</a>, <a href="wezterm/wezterm.lua">WezTerm</a>, <a href="ghostty/config.ghostty">Ghostty</a>, <a href="zsh/.zshrc">zsh</a>, <a href="nvim/lua/keymaps.lua">Neovim</a> and <a href="raycast/README.md">global settings</a>. This is a maintained snapshot; app help includes context-specific and plugin bindings.</p></footer>
 </main>
 <script>
 // [Action, key or command, optional "extra"]. Space-separated search terms match across the whole row.
 const groups = [
-['Global','Apps & windows','Available across macOS.',[
+['Global','Apps & windows','Alt+T still opens WezTerm. For the Ghostty trial, search Ghostty in Raycast.',[
 ['Raycast launcher','Alt+Space'],['Cycle windows / reverse','Alt+Tab / Alt+Shift+Tab'],['Search all windows','Alt+P'],['Browser · Zen','Alt+J'],['Terminal · WezTerm','Alt+T'],['Notes · Obsidian','Alt+W'],['IDE · VS Code','Alt+I'],['Clipboard history','Alt+V'],['Dictation · start / stop','Alt+R'],['Chrome · existing shortcut','Cmd+B','extra'],['Chrome · search tabs','Alt+Shift+B','extra']]],
 ['Herdr','Panes & tabs','Direct controls work while a terminal pane is focused.',[
 ['Focus left / down / up / right','Ctrl+Shift+← / ↓ / ↑ / →'],['Resize pane','Ctrl+Shift+Alt+arrows'],['Split right','Ctrl+Shift+D'],['Split down','Ctrl+Shift+E'],['New tab','Ctrl+Shift+T'],['Previous / next tab','Ctrl+Shift+, / .'],['Rename tab / task','Ctrl+Shift+R'],['New named workspace','Ctrl+Shift+N'],['Navigator','Ctrl+Shift+P'],['Toggle sidebar','Ctrl+Shift+S'],['Zoom / restore pane','Ctrl+Shift+Z'],['Close focused pane immediately','Ctrl+Shift+W']]],
 ['Herdr','Workspaces & agents','Grouped order stays fixed across status changes. Task/tab names lead each row, with workspace/agent context underneath. Last pane switches back and forth, not through workspace history.',[
 ['Previous / next workspace','Ctrl+Shift+H / L'],['Previous / next agent','Ctrl+Shift+K / J'],['Jump to workspace 1–9','Ctrl+Cmd+1–9'],['Agent 1–9 · unreliable in WezTerm','Ctrl+Shift+1–9'],['Return to last pane','Ctrl+Shift+Tab']]],
-['Herdr','Copy & paste','Select terminal scrollback inside Herdr; paste through WezTerm.',[
+['Herdr','Copy & paste','Select terminal scrollback inside Herdr; paste through WezTerm or Ghostty.',[
 ['Enter copy mode','Ctrl+Shift+C'],['Move in copy mode','h / j / k / l'],['Search scrollback','/'],['Next search match','n'],['Start selection','v'],['Copy selection to clipboard','y'],['Clear selection / exit copy mode','Esc'],['Paste clipboard','Ctrl+Shift+V']]],
 ['Herdr','Prefix essentials','Press Ctrl+B, release, then the next key. Jobs survive detach.',[
 ['Native help','Ctrl+B then ?'],['Detach this client','Ctrl+B then q'],['Close pane immediately','Ctrl+B then x'],['Resize mode','Ctrl+B then r'],['Go to tab 1–9','Ctrl+B then 1–9'],['Workspace picker','Ctrl+B then w'],['Open notification target','Ctrl+B then o']]],
 ['Herdr','Prefix reference','Fallbacks retained alongside the direct shortcuts.',[
 ['Settings','Ctrl+B then s','extra'],['Reload configuration','Ctrl+B then Shift+R','extra'],['Navigator','Ctrl+B then g','extra'],['Toggle sidebar','Ctrl+B then b','extra'],['New tab','Ctrl+B then c','extra'],['Previous / next tab','Ctrl+B then p / n','extra'],['New workspace','Ctrl+B then Shift+N','extra'],['New worktree','Ctrl+B then Shift+G','extra'],['Rename workspace','Ctrl+B then Shift+W','extra'],['Close workspace immediately','Ctrl+B then Shift+D','extra'],['Rename tab','Ctrl+B then Shift+T','extra'],['Close tab immediately','Ctrl+B then Shift+X','extra'],['Edit scrollback','Ctrl+B then e','extra'],['Focus left / down / up / right','Ctrl+B then h / j / k / l','extra'],['Next / previous pane','Ctrl+B then Tab / Shift+Tab','extra'],['Split right / down','Ctrl+B then v / -','extra'],['Zoom pane','Ctrl+B then z','extra'],['Copy mode','Ctrl+B then [','extra']]],
-['WezTerm','Terminal appearance','The = key increases font size; no extra Shift is needed.',[
-['Increase font size','Ctrl+Cmd+='],['Decrease font size','Ctrl+Cmd+-'],['Reset font size · 14 pt','Ctrl+Cmd+0'],['Quit WezTerm · confirmation','Ctrl+Q']]],
+['Terminal','Terminal appearance','WezTerm and Ghostty share these controls. The = key increases font size; no extra Shift is needed.',[
+['Increase font size','Ctrl+Cmd+='],['Decrease font size','Ctrl+Cmd+-'],['Reset font size · 14 pt','Ctrl+Cmd+0'],['Quit terminal host · confirmation','Ctrl+Q']]],
 ['Shell','Command line','zsh · Emacs editing · Powerlevel10k prompt.',[
 ['Fuzzy command history','Ctrl+R'],['Insert file / directory path','Ctrl+T'],['Complete / choose completion','Tab'],['Accept inline suggestion','Right'],['Start / end of line','Ctrl+A / Ctrl+E'],['Clear entire input line','Ctrl+U'],['Delete to end of line','Ctrl+K'],['Delete previous word','Ctrl+W'],['Cancel input / interrupt command','Ctrl+C'],['Clear screen','Ctrl+L'],['Previous / next history entry','Up / Down','extra'],['Yank killed shell text','Ctrl+Y','extra'],['fzf · choose / cancel','Enter / Esc','extra'],['fzf · move selection','Ctrl+J / Ctrl+K','extra']]],
 ['Shell','Launch & jump','Type these at the shell prompt, then Enter.',[

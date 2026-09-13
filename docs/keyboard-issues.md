@@ -1,9 +1,9 @@
 # macOS modified-number and punctuation input
 
-Current installed WezTerm, verified during cleanup: nightly
-`20260906-101927-d2f3f05b`. WezTerm remains the chosen host because the setup also
-needs Windows support. Ghostty was a diagnostic comparison, not a migration.
-The findings below retain the stable/nightly distinction from the tests.
+Installed WezTerm: nightly `20260906-101927-d2f3f05b`. Ghostty 1.3.1 is now
+configured as an alternative macOS host for the same Herdr workflow. WezTerm
+remains installed for fallback and future Windows use. The findings below
+retain the stable/nightly distinction from the original tests.
 
 Reproduced 2026-09-07 with installed WezTerm
 `20240203-110809-5046fc22` and the official nightly
@@ -104,13 +104,33 @@ Ctrl+Shift key-down events for 1, 2, 3, [ and ]. A subsequent automated test sen
 logical events directly to Ghostty and confirmed 4–9, Escape, and Ctrl+Shift+Alt
 left/right. Escape arrived as `ESC [ 27 u` with a separate release event.
 
-A temporary Ghostty config at `/tmp/ghostty-herdr-test/config` clears host
-shortcuts, preserves Option-character composition, and adds only paste and font
-controls. It attaches to the existing default Herdr session. Raycast still opens
-WezTerm; no Ghostty config was deployed into the live config directory.
+On 2026-09-13, `ghostty/config.ghostty` was deployed through the terminal slice.
+It clears host shortcuts, preserves Option-character composition, and binds
+paste, font controls and Ctrl+Q with confirmation. Normal launch attaches to the
+existing default Herdr session. Raycast Alt+T still opens WezTerm during the trial.
 
 The trial used native Ctrl+Shift+bracket bindings alongside U/I; both were
 replaced by comma/period tab bindings on 2026-09-13.
-Actual daily use, Polish letter input, and right-side modifier behavior still
-need human confirmation. The existing Karabiner rules include Ghostty for the
-left Cmd/Ctrl swap, but not for the right Cmd/Ctrl swap.
+
+The deployed configuration was exercised using native macOS key events sent
+directly to an isolated Ghostty GUI, with Kitty flags 7:
+
+- Ctrl+Shift+1–9, comma/period and brackets retained modifier 6 on key-down.
+- Escape arrived encoded as `ESC [ 27 u`, with a separate release event.
+- Ctrl+Shift+Alt+left/right retained modifier 8; Ctrl+Cmd+1 retained modifier 13.
+- Polish Pro Option-letter and Option+Shift-letter input produced all nine
+  lowercase and uppercase Polish characters.
+- Ctrl+Shift+V delivered clipboard text with bracketed-paste delimiters.
+- Ctrl+Cmd+= / - / 0 increased, decreased and reset font size, observed through
+  terminal grid dimensions. Ctrl+Q opened the native quit confirmation.
+
+An isolated named Herdr session confirmed new tabs, comma/period tab switching,
+pane splitting, and copy-mode entry/exit with Escape. The temporary session and
+input receiver were removed afterward; the default session was not used for
+mutation tests.
+
+These synthetic events test Ghostty's native encoder, not physical hardware or
+Karabiner interception. The deployed Karabiner rules now include Ghostty for
+both left and right Cmd/Ctrl swaps; physical right-side behavior still needs
+daily-use confirmation. Screen capture was blocked by macOS permissions, so
+appearance was configured from WezTerm's settings, not visually certified.

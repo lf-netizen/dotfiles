@@ -146,7 +146,7 @@
                         ]
                     },
                     {
-                        "description": "Swap Left Command and Left Control in VSCode, Cursor, iTerm, and WezTerm.",
+                        "description": "Swap Command and Control on both sides in VSCode, Cursor, iTerm, WezTerm, and Ghostty.",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -198,7 +198,8 @@
                                             "^com\\.googlecode\\.iterm2$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^com\\.todesktop\\.230313mzl4w4u92$",
-                                            "^com\\.github\\.wez\\.wezterm$"
+                                            "^com\\.github\\.wez\\.wezterm$",
+                                            "^com\\.mitchellh\\.ghostty$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -218,7 +219,8 @@
                                             "^com\\.googlecode\\.iterm2$",
                                             "^com\\.microsoft\\.VSCode$",
                                             "^com\\.todesktop\\.230313mzl4w4u92$",
-                                            "^com\\.github\\.wez\\.wezterm$"
+                                            "^com\\.github\\.wez\\.wezterm$",
+                                            "^com\\.mitchellh\\.ghostty$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }

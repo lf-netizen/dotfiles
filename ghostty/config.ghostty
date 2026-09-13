@@ -1,0 +1,60 @@
+# Attach to the same persistent session as WezTerm; Herdr owns tabs and panes.
+command = /opt/homebrew/bin/herdr
+
+font-family = JetBrains Mono
+font-family = MesloLGS NF
+font-family = Menlo
+font-family = Monaco
+font-size = 14
+font-feature = -calt, -clig, -liga
+
+# Exact Kanagawa (Gogh) palette from WezTerm, not Ghostty's Kanagawa Wave.
+foreground = #dcd7ba
+palette = 0=#090618
+palette = 1=#c34043
+palette = 2=#76946a
+palette = 3=#c0a36e
+palette = 4=#7e9cd8
+palette = 5=#957fb8
+palette = 6=#6a9589
+palette = 7=#dcd7ba
+palette = 8=#727169
+palette = 9=#e82424
+palette = 10=#98bb6c
+palette = 11=#e6c384
+palette = 12=#7fb4ca
+palette = 13=#938aa9
+palette = 14=#7aa89f
+palette = 15=#c8c093
+cursor-color = #dcd7ba
+cursor-text = #1f1f28
+cursor-style = block
+cursor-style-blink = false
+
+# Preprocessed wallpaper supplies WezTerm's saturation=0, brightness=0.5 in linear RGB.
+# Ghostty composites it with the same 50% #282c35 overlay; no desktop bleed.
+background = #282c35
+background-image = ~/.config/img/ghostty-background.jpeg
+background-image-opacity = 0.5
+background-image-position = center
+background-image-fit = cover
+background-opacity = 1
+
+macos-titlebar-style = hidden
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = false
+scrollbar = never
+window-width = 80
+window-height = 24
+confirm-close-surface = always
+
+# Preserve Polish Option-letter composition on both sides of the keyboard.
+# Kitty keyboard support is native; do not force WezTerm's encoder workarounds.
+macos-option-as-alt = false
+keybind = clear
+keybind = ctrl+q=quit
+keybind = ctrl+shift+v=paste_from_clipboard
+keybind = ctrl+super+equal=increase_font_size:1
+keybind = ctrl+super+minus=decrease_font_size:1
+keybind = ctrl+super+0=reset_font_size

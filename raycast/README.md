@@ -15,6 +15,12 @@
 No messenger or database client is added. Keep Rectangle's existing shortcuts.
 Polish Alt letter keys remain reserved. fzf's Alt+C is disabled in zsh.
 
+Ghostty is installed and configured as a trial host for the same Herdr session.
+Launch it by searching **Ghostty** in Raycast; Alt+T intentionally remains on
+WezTerm for fallback. The encrypted export is unchanged. If adopting Ghostty as
+the daily host, move Alt+T from WezTerm to Ghostty in Extensions → Applications,
+then capture a new Settings-only export using the workflow below.
+
 `settings.rayconfig` is an encrypted settings-category export from Raycast 1.104.28.
 The live runtime and extensions under `~/.config/raycast` are not symlinked.
 Use Settings → Advanced → Import / Export for restore and capture. Export only
