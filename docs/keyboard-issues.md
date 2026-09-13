@@ -1,4 +1,4 @@
-# macOS modified-number and bracket input
+# macOS modified-number and punctuation input
 
 Current installed WezTerm, verified during cleanup: nightly
 `20260906-101927-d2f3f05b`. WezTerm remains the chosen host because the setup also
@@ -49,9 +49,10 @@ Source references:
 
 ## Status
 
-Confirmed terminal input bug; **not fixed**. No translation bindings, custom
-binaries, reporting-mode injection, or Karabiner changes were deployed. The
-nightly was tested separately, not installed over the stable app.
+Confirmed terminal input bug; **not fixed in the installed nightly**. The initial
+investigation deployed no translation bindings, custom binaries, reporting-mode
+injection, or Karabiner changes. The nightly is now the installed host; the tab-key
+workaround below does not fix numbered or bracket keys.
 
 A proper fix needs to preserve raw modifier and key identity in WezTerm's Kitty
 encoding, including Ctrl+Shift punctuation, while retaining composed-text input.
@@ -59,9 +60,22 @@ Regression coverage should include key-down and key-up for 1–9 and brackets,
 flags 7 and 31, and Polish Option-letter composition. Changing the initial
 plain-text check alone is insufficient for the bracket key identity issue.
 
-Current usable navigation: Ctrl+Shift+J/K for agents, H/L for workspaces, U/I for
-tabs, Ctrl+Shift+P navigator, and Ctrl+Cmd+1–9 for workspaces. Ctrl+Shift+1–9 is
-still configured for agents but is affected by this bug.
+Current usable navigation: Ctrl+Shift+J/K for agents, H/L for workspaces,
+comma/period for tabs, Ctrl+Shift+P navigator, and Ctrl+Cmd+1–9 for workspaces.
+Ctrl+Shift+1–9 is still configured for agents but is affected by this bug.
+
+### Comma/period tab navigation workaround
+
+On 2026-09-13, a physical Ctrl+Shift+period event sent directly to an isolated
+WezTerm nightly GUI typed into the shell instead of switching Herdr tabs.
+The config now intercepts `phys:Comma` and `phys:Period` with `CTRL|SHIFT`,
+sending `ESC [ 44;6u` and `ESC [ 46;6u`. These bypass the affected encoder;
+Herdr binds them as `ctrl+shift+comma` and `ctrl+shift+period`.
+
+Physical key events then switched next/previous tabs and wrapped correctly
+in an isolated Herdr 0.8.2 session. U/I and bracket tab bindings were removed;
+the native Ctrl+B then p/n fallbacks remain. This is a two-key workaround,
+not a global keyboard-protocol or Polish-input change.
 
 ## Escape: separate confirmed interaction
 
@@ -95,7 +109,8 @@ shortcuts, preserves Option-character composition, and adds only paste and font
 controls. It attaches to the existing default Herdr session. Raycast still opens
 WezTerm; no Ghostty config was deployed into the live config directory.
 
-Native Ctrl+Shift+bracket bindings are restored alongside U/I for the trial.
+The trial used native Ctrl+Shift+bracket bindings alongside U/I; both were
+replaced by comma/period tab bindings on 2026-09-13.
 Actual daily use, Polish letter input, and right-side modifier behavior still
 need human confirmation. The existing Karabiner rules include Ghostty for the
 left Cmd/Ctrl swap, but not for the right Cmd/Ctrl swap.

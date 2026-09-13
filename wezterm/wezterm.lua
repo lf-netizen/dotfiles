@@ -39,6 +39,9 @@ return {
 	keys = {
 		{ key = "q", mods = "CTRL", action = act.QuitApplication },
 		{ key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
+		-- Preserve modifiers lost by WezTerm's macOS shifted-punctuation encoder.
+		{ key = "phys:Comma", mods = "CTRL|SHIFT", action = act.SendString("\x1b[44;6u") },
+		{ key = "phys:Period", mods = "CTRL|SHIFT", action = act.SendString("\x1b[46;6u") },
 		{ key = "=", mods = "CTRL|CMD", action = act.IncreaseFontSize },
 		{ key = "-", mods = "CTRL|CMD", action = act.DecreaseFontSize },
 		{ key = "0", mods = "CTRL|CMD", action = act.ResetFontSize },

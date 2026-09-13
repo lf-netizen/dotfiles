@@ -47,7 +47,8 @@ The intentional Karabiner Cmd/Ctrl swap is unchanged.
 | Ctrl+Shift+arrows | Focus Herdr pane |
 | Ctrl+Shift+Alt+arrows | Resize Herdr pane |
 | Ctrl+Shift+D / E | Split right / down |
-| Ctrl+Shift+T / U / I | New / previous / next tab |
+| Ctrl+Shift+T / , / . | New / previous / next tab |
+| Ctrl+Shift+R | Rename the current tab/task |
 | Ctrl+Shift+N | Name and create a workspace |
 | Ctrl+Shift+H / L | Previous / next workspace |
 | Ctrl+Shift+K / J | Previous / next agent |
@@ -62,14 +63,20 @@ The intentional Karabiner Cmd/Ctrl swap is unchanged.
 | Ctrl+B, then ? | Herdr's native help and fallback bindings |
 
 Copy mode: `/` searches, `n` repeats, h/j/k/l moves, v starts a selection,
-y copies, Esc clears/exits. U/I is the usable tab binding in WezTerm; native
-Ctrl+Shift+[ / ] remains configured but affected by its input bug.
-Ctrl+Shift+- is free. See [keyboard findings](docs/keyboard-issues.md).
+y copies, Esc clears/exits. Tab switching uses Ctrl+Shift+comma / period;
+WezTerm forwards these as explicit Kitty key sequences to preserve modifiers.
+The former U/I and bracket tab bindings are removed. Ctrl+Shift+- is free.
+See [keyboard findings](docs/keyboard-issues.md).
 Reserve Alt+A/C/E/L/N/O/S/X/Z and shifted variants for Polish letters.
 
 Herdr close confirmations are disabled, including prefix close actions.
 Close a tab with Ctrl+B, then Shift+X. Last pane is a back-and-forth pane switch,
 not a separate workspace-history command. Ctrl+Cmd also selects numbered workspaces.
+
+The agent panel stays in workspace/tab order (`grouped`), not attention order:
+done/needs-input indicators change without moving the row. Task/tab names get
+a bright, full-width first line, with workspace and agent type underneath.
+The expanded sidebar is 38–48 columns. Use Ctrl+Shift+R to name a task.
 
 zsh uses Emacs editing, Tab completion, inline suggestions (Right accepts),
 syntax highlighting, Ctrl+R history, Ctrl+T paths, `cd` → zoxide, `zi` picker,
