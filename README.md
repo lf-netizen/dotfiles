@@ -97,15 +97,17 @@ session. Shells, tabs, panes, workspaces, agents, sidebar, copy mode and notific
 remain Herdr-owned; no second set of terminal tabs or split shortcuts is added.
 Quit closes the terminal client, not Herdr's persistent jobs.
 
-`ghostty/config.ghostty` matches the 14 pt JetBrains Mono font and fallback order,
-disabled ligatures, Kanagawa (Gogh) ANSI colors, default non-blinking block cursor,
+`ghostty/config.ghostty` uses Ghostty's bundled **Kanagawa Wave** theme, including
+its palette, background, cursor and selection colors. The 14 pt JetBrains Mono
+font and fallback order, disabled ligatures, default non-blinking block cursor,
 zero padding, hidden titlebar, centered cover wallpaper, paste/font/quit shortcuts
-and close confirmation. Both Option keys retain Polish composition. Karabiner's
-Cmd/Ctrl swap now includes Ghostty on both sides.
+and close confirmation still match WezTerm. Both Option keys retain Polish
+composition. Karabiner's Cmd/Ctrl swap includes Ghostty on both sides.
 
 Ghostty has no WezTerm-style per-image HSB transform. Its tracked wallpaper is
 preprocessed from the original with saturation zero and brightness halved in
-linear RGB; Ghostty mixes it 50/50 with `#282c35` without desktop transparency.
+linear RGB; Ghostty mixes it 50/50 with the theme background (`#1f1f28` for
+Kanagawa Wave) without desktop transparency.
 Regenerate it after changing the original (ImageMagick is needed only for this):
 
 ```sh
