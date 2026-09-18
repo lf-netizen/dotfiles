@@ -1,5 +1,7 @@
-# Keep LazyGit's default layout and keybindings.
+# Keep LazyGit's default panel arrangement and keybindings.
 gui:
+  showNumstatInFilesView: true
+  shrinkSidePanelsToContent: true
   # Fixed line count: approximate half-page scrolling for Ctrl+U / Ctrl+D.
   # Also applies to PgUp/PgDn, Shift+J/K, and mouse-wheel scrolling.
   scrollHeight: 15
@@ -11,5 +13,10 @@ git:
         delta --dark --paging=never --true-color=always
         --syntax-theme=kanagawa --line-numbers
         --hunk-header-style="line-number syntax"
-        --minus-style="syntax #49282e" --minus-emph-style="syntax #753235"
-        --plus-style="syntax #243d2f" --plus-emph-style="syntax #2b5c37"
+        --line-numbers-zero-style="#7C7C99"
+        --line-numbers-minus-style="#C34043" --line-numbers-plus-style="#76946A"
+        --minus-style="syntax #43242B" --minus-emph-style="syntax bold #43242B"
+        --plus-style="syntax #2B3328" --plus-emph-style="syntax bold #2B3328"
+    - name: color-words
+      type: rawGit
+      args: [--color-words]

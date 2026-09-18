@@ -86,10 +86,15 @@ LazyGit uses delta for syntax-highlighted diffs with line numbers and red/green
 backgrounds. Install it with `brew install git-delta`; `lazygit/config.yml`
 is linked to `~/.config/lazygit/config.yml` with the `preserved` slice.
 `.zshenv` exports `XDG_CONFIG_HOME="$HOME/.config"` so LazyGit finds it on macOS.
-It uses the installed bat Kanagawa theme for diff syntax colors
-and leaves LazyGit's layout and keys at their defaults. Ctrl+U/D scroll 15 lines
+It uses the installed bat Kanagawa theme, aligned with Neovim's Wave palette,
+plus Kanagawa diff backgrounds and line-number colors. After editing
+`bat/themes/kanagawa.tmTheme`, run `bat cache --build`. The syntax engines differ,
+so individual token colors may still vary between delta and Neovim. This setup
+keeps the default panel arrangement and keys, shows per-file change counts,
+and shrinks side panels to fit their contents. Ctrl+U/D scroll 15 lines
 (a fixed approximation of half a page); this shared setting also affects
 PgUp/PgDn, Shift+J/K, and mouse-wheel scrolling. Restart `lg` after edits.
+Press `|` to switch between delta (the default) and word-level diffs for prose.
 `ls` restores the previous eza layout: icons, colours, Git status and compact
 rows, excluding `__pycache__`. `ls -a` includes hidden entries; `command ls`
 bypasses the alias. `ll` retains the system's detailed listing with hidden files.
