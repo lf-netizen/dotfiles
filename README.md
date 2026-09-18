@@ -14,7 +14,7 @@ and application-owned runtime data; it is not another dotfiles repository.
 | `nvim`, `vscode` | Current editors; VS Code shares Neovim's VS Code-specific branch |
 | `karabiner`, `raycast` | Modifier remaps and exported global shortcuts |
 | `agents` | Claude/Codex/OMP authored settings, instructions, and restore helpers' inventory |
-| `bat`, `git`, `img` | Active theme, ignore rules, and terminal background |
+| `bat`, `git`, `img`, `lazygit` | Active theme, ignore rules, terminal background, and Git diff rendering |
 | `scripts` | Deployment, export/rollback, and integration/extension setup |
 | `docs` | Known issues and historical migration records |
 
@@ -82,6 +82,14 @@ zsh uses Emacs editing, Tab completion, inline suggestions (Right accepts),
 syntax highlighting, Ctrl+R history, Ctrl+T paths, `cd` → zoxide, `zi` picker,
 `builtin cd` for literal paths, `v` → nvim and `lg` → lazygit.
 Machine-specific PATH entries live in the untracked `~/.zshrc.local`.
+LazyGit uses delta for syntax-highlighted diffs with line numbers and red/green
+backgrounds. Install it with `brew install git-delta`; `lazygit/config.yml`
+is linked to `~/.config/lazygit/config.yml` with the `preserved` slice.
+`.zshenv` exports `XDG_CONFIG_HOME="$HOME/.config"` so LazyGit finds it on macOS.
+It uses the installed bat Kanagawa theme for diff syntax colors
+and leaves LazyGit's layout and keys at their defaults. Ctrl+U/D scroll 15 lines
+(a fixed approximation of half a page); this shared setting also affects
+PgUp/PgDn, Shift+J/K, and mouse-wheel scrolling. Restart `lg` after edits.
 `ls` restores the previous eza layout: icons, colours, Git status and compact
 rows, excluding `__pycache__`. `ls -a` includes hidden entries; `command ls`
 bypasses the alias. `ll` retains the system's detailed listing with hidden files.
@@ -165,7 +173,7 @@ this normalization is not a general secret scrubber. Review hook trust normally
 on each machine. Origin is `https://github.com/lf-netizen/dotfiles` (SSH for pushing).
 
 Install Git, Powerlevel10k, fzf, zoxide, eza, Herdr, WezTerm, Ghostty 1.3.1+,
-Neovim, LazyGit, LazySQL, bat, jq, Node.js/npm (for the Playwright MCP), Python 3.11+,
+Neovim, LazyGit, git-delta, LazySQL, bat, jq, Node.js/npm (for the Playwright MCP), Python 3.11+,
 Claude Code and Codex. Install JetBrains Mono and MesloLGS NF fonts. zsh-autosuggestions and zsh-syntax-highlighting
 are sourced directly from Homebrew. There is no package manifest or bulk installer.
 See [agent preservation](agents/README.md) and [Raycast settings](raycast/README.md).
