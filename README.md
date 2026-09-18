@@ -29,7 +29,7 @@ editor plugins separately on first launch.
 
 ## Daily keys
 
-Open the searchable, offline [HTML keyboard reference](cheatsheet.html) with
+Open the searchable, offline [HTML keyboard reference](docs/cheatsheet.html) with
 `cheatsheet` in a fresh zsh shell. You can also bookmark the page in your browser.
 It includes daily and expanded views, app filters, and Print / PDF. Search always
 includes the expanded entries. Print uses the current view and filters.
@@ -48,13 +48,16 @@ The intentional Karabiner Cmd/Ctrl swap is unchanged.
 | Ctrl+Shift+Alt+arrows | Resize Herdr pane |
 | Ctrl+Shift+D / E | Split right / down |
 | Ctrl+Shift+T / , / . | New / previous / next tab |
+| Ctrl+Shift+[ / ] | Previous / next tab (alternatives) |
 | Ctrl+Shift+R | Rename the current tab/task |
 | Ctrl+Shift+N | Name and create a workspace |
 | Ctrl+Shift+H / L | Previous / next workspace |
 | Ctrl+Shift+K / J | Previous / next agent |
 | Ctrl+Cmd+1–9 | Jump to workspace 1–9 |
-| Ctrl+Shift+1–9 | Agent jump binding; affected by the known WezTerm input bug |
-| Ctrl+Shift+Tab | Return to the last pane |
+| Ctrl+Shift+1–8 | Jump to agent by number; affected by the known WezTerm input bug |
+| Ctrl+Shift+9 | Jump to the last local agent in workspace/tab order |
+| Ctrl+Shift+O (letter O) | Jump to the most recently blocked/done local agent |
+| Ctrl+Shift+Tab | Return to the last pane (back-and-forth) |
 | Ctrl+Shift+W | Close the focused pane immediately |
 | Ctrl+Q | Quit the terminal host with confirmation |
 | Ctrl+Shift+P / S / Z | Navigator / sidebar / zoom |
@@ -63,15 +66,23 @@ The intentional Karabiner Cmd/Ctrl swap is unchanged.
 | Ctrl+B, then ? | Herdr's native help and fallback bindings |
 
 Copy mode: `/` searches, `n` repeats, h/j/k/l moves, v starts a selection,
-y copies, Esc clears/exits. Tab switching uses Ctrl+Shift+comma / period;
+y copies, Esc clears/exits. Tab switching uses Ctrl+Shift+comma / period or [ / ];
 WezTerm forwards these as explicit Kitty key sequences; Ghostty encodes them natively.
-The former U/I and bracket tab bindings are removed. Ctrl+Shift+- is free.
+The former U/I tab bindings are removed. Ctrl+Shift+- is free.
 See [keyboard findings](docs/keyboard-issues.md).
 Reserve Alt+A/C/E/L/N/O/S/X/Z and shifted variants for Polish letters.
 
 Herdr close confirmations are disabled, including prefix close actions.
 Close a tab with Ctrl+B, then Shift+X. Last pane is a back-and-forth pane switch,
-not a separate workspace-history command. Ctrl+Cmd also selects numbered workspaces.
+not a separate workspace-history command. Ctrl+Shift+6 selects agent 6.
+Ctrl+Shift+9 runs
+`herdr/focus-last-agent.py` to select the final local agent in workspace/tab order;
+it does not follow remote-machine lists or custom filtered agent views.
+Ctrl+Shift+O uses the same helper to focus the most recently changed local
+agent reported as blocked or done, excluding the currently focused agent.
+It does nothing if none qualify; idle/working agents are skipped. Status comes
+from the server, so another client's seen/unseen state can differ.
+Ctrl+Cmd also selects numbered workspaces.
 
 The agent panel stays in workspace/tab order (`grouped`), not attention order:
 done/needs-input indicators change without moving the row. Task/tab names get

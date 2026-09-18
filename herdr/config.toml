@@ -1,21 +1,25 @@
 # Daily controls plus the shipped Ctrl+B prefix and native prefix actions.
 onboarding = false
+
 [theme]
 name = "kanagawa"
 auto_switch = false
+
 [theme.custom]
 panel_bg = "reset"
 sidebar_bg = "reset"
+
 [terminal]
 default_shell = "/bin/zsh"
 shell_mode = "auto"
 new_cwd = "follow"
+
 [keys]
 goto = ["ctrl+shift+p", "prefix+g"]
 toggle_sidebar = ["ctrl+shift+s", "prefix+b"]
 new_tab = ["ctrl+shift+t", "prefix+c"]
-previous_tab = ["ctrl+shift+comma", "prefix+p"]
-next_tab = ["ctrl+shift+period", "prefix+n"]
+previous_tab = ["ctrl+shift+comma", "ctrl+shift+[", "prefix+p"]
+next_tab = ["ctrl+shift+period", "ctrl+shift+]", "prefix+n"]
 rename_tab = ["ctrl+shift+r", "prefix+shift+t"]
 new_workspace = ["ctrl+shift+n", "prefix+shift+n"]
 previous_workspace = "ctrl+shift+h"
@@ -23,7 +27,8 @@ next_workspace = "ctrl+shift+l"
 switch_workspace = "ctrl+cmd+1..9"
 previous_agent = "ctrl+shift+k"
 next_agent = "ctrl+shift+j"
-focus_agent = "ctrl+shift+1..9"
+# 9 runs the last-agent helper below.
+focus_agent = ["ctrl+shift+1", "ctrl+shift+2", "ctrl+shift+3", "ctrl+shift+4", "ctrl+shift+5", "ctrl+shift+6", "ctrl+shift+7", "ctrl+shift+8"]
 last_pane = "ctrl+shift+tab"
 close_pane = ["ctrl+shift+w", "prefix+x"]
 focus_pane_left = ["ctrl+shift+left", "prefix+h"]
@@ -38,6 +43,17 @@ split_vertical = ["ctrl+shift+d", "prefix+v"]
 split_horizontal = ["ctrl+shift+e", "prefix+minus"]
 zoom = ["ctrl+shift+z", "prefix+z"]
 copy_mode = ["ctrl+shift+c", "prefix+["]
+
+[[keys.command]]
+key = "ctrl+shift+9"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/focus-last-agent.py"'
+
+[[keys.command]]
+key = "ctrl+shift+o"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/focus-last-agent.py" --attention'
+
 [ui]
 sidebar_width = 38
 sidebar_min_width = 38
@@ -57,15 +73,20 @@ show_agent_labels_on_pane_borders = true
 agent_panel_sort = "spaces"
 status_indicators = "symbols"
 window_title = "{workspace}: {tab}"
+
 [ui.sidebar.agents]
 rows = [
   ["state_icon", { token = "tab", bold = true, dim = false }],
+
   [{ token = "workspace", bold = false, dim = true }, "agent"],
 ]
+
 [ui.toast]
 delivery = "system"
 delay_seconds = 1
+
 [ui.sound]
 enabled = true
+
 [session]
 resume_agents_on_restore = true

@@ -8,6 +8,12 @@ Claude settings, instructions, the existing jq status line, enabled plugins and
 the personal graphify skill are preserved. Codex retains its model, effort,
 permissions, MCP settings, rules and TUI status line. Instructions remain separate.
 
+Codex defaults to YOLO permissions (`approval_policy = "never"` and
+`sandbox_mode = "danger-full-access"`) for new and resumed sessions. This keeps
+Herdr's plain `codex resume <id>` restores in the preferred mode without a
+wrapper or Herdr patch. Explicit CLI or project settings can override defaults.
+See [Codex permission defaults](https://learn.chatgpt.com/docs/sandboxing#configure-defaults).
+
 `installation-inventory.json` records the installed plugin identities and Claude
 versions/source. Codex's curated remote packages currently are openai-templates
 0.1.1, plugin-management 0.1.0 and deep-research-work 0.1.14. These are runtime

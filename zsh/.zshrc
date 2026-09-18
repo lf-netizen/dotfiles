@@ -35,7 +35,7 @@ alias ll='command ls -lah'
 # Resolve through the live zshrc symlink so this also works after moving the repo.
 function cheatsheet() {
   local dotfiles_root="${${:-${(%):-%x}}:A:h:h}"
-  open "$dotfiles_root/cheatsheet.html"
+  open "$dotfiles_root/docs/cheatsheet.html"
 }
 export BAT_THEME=kanagawa
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)

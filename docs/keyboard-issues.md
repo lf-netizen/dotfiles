@@ -9,7 +9,49 @@ Reproduced 2026-09-07 with installed WezTerm
 `20240203-110809-5046fc22` and the official nightly
 `20260906-101927-d2f3f05b`. Herdr is 0.8.2.
 
+## Current bindings (2026-09-18)
+
+Herdr accepts both Ctrl+Shift+comma/period and Ctrl+Shift+[/] for tabs.
+WezTerm explicitly sends Kitty sequences for all four keys, plus Ctrl+Shift+6
+(agent 6) and Ctrl+Shift+9 (last local agent).
+Ghostty uses its native encoding. Agent-number bindings remain on 1–8;
+the historical WezTerm number-key issue still applies to those keys.
+
+The last-agent helper follows local workspace/tab order (`agent_panel_sort =
+"spaces"`), not remote-machine lists or custom filtered agent views. The
+last-pane action can return within the same tab after switching panes.
+
+Config validation passed; these new physical shortcuts still need a manual
+check in the user's terminal. Earlier captures below describe the old bindings.
+
 ## Reproduction and evidence
+
+### Herdr 0.9.1 navigation investigation (2026-09-19)
+
+The active Ghostty client failed Ctrl+Shift+Tab and Ctrl+Shift+9 even after
+an in-client reload (Ctrl+B, then Shift+R). An isolated Herdr 0.9.1 PTY test
+with the same bindings confirmed `ESC [ 9;6u` switches back to the previous
+pane, while `ESC [ 57;6u` and `ESC [ 111;6u` invoke the 9/O custom commands.
+That test used marker commands, so it verifies key dispatch, not live agent focus.
+
+Ghostty explicitly forwards `ESC [ 9;6u` for Ctrl+Shift+Tab and
+`ESC [ 111;6u` for Ctrl+Shift+O. The user confirmed both still need these
+encoding rules. Ctrl+Shift+9 works with native encoding after the helper fix
+below, so its temporary forwarding rule was removed. The original physical
+bytes were not captured, so the exact encoding difference is unconfirmed.
+Herdr's server reload does not reload Ghostty's own config; use
+Ghostty → Reload Configuration.
+
+The separate 9/O failure was traced to the Herdr server's inherited GUI PATH:
+`/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Ghostty.app/Contents/MacOS`.
+Replaying its `/bin/sh -lc` command lookup found Python but could not find
+`herdr`. Detached custom commands discard stderr, hiding the helper failure.
+The helper now uses `HERDR_BIN_PATH`, supplied by Herdr, with the repository's
+standard `/opt/homebrew/bin/herdr` installation as a fallback. Both agent-list
+and agent-focus subprocesses use that executable.
+
+Disk pressure also caused temporary-file and Herdr sound errors during the
+investigation; it has not been established as the cause of the shortcut failures.
 
 Use a raw terminal receiver outside Herdr. Request Kitty keyboard flags 7
 (`ESC [ > 7 u`), matching Herdr's normal host mode, and send logical Ctrl+Shift

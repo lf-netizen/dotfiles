@@ -42,6 +42,10 @@ return {
 		-- Preserve modifiers lost by WezTerm's macOS shifted-punctuation encoder.
 		{ key = "phys:Comma", mods = "CTRL|SHIFT", action = act.SendString("\x1b[44;6u") },
 		{ key = "phys:Period", mods = "CTRL|SHIFT", action = act.SendString("\x1b[46;6u") },
+		{ key = "phys:LeftBracket", mods = "CTRL|SHIFT", action = act.SendString("\x1b[91;6u") },
+		{ key = "phys:RightBracket", mods = "CTRL|SHIFT", action = act.SendString("\x1b[93;6u") },
+		{ key = "phys:6", mods = "CTRL|SHIFT", action = act.SendString("\x1b[54;6u") },
+		{ key = "phys:9", mods = "CTRL|SHIFT", action = act.SendString("\x1b[57;6u") },
 		{ key = "=", mods = "CTRL|CMD", action = act.IncreaseFontSize },
 		{ key = "-", mods = "CTRL|CMD", action = act.DecreaseFontSize },
 		{ key = "0", mods = "CTRL|CMD", action = act.ResetFontSize },

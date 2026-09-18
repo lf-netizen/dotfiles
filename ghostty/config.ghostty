@@ -34,6 +34,9 @@ macos-option-as-alt = false
 keybind = clear
 keybind = ctrl+q=quit
 keybind = ctrl+shift+v=paste_from_clipboard
+# Send the exact modified-key sequences accepted by Herdr 0.9.1.
+keybind = ctrl+shift+tab=csi:9;6u
+keybind = ctrl+shift+o=csi:111;6u
 keybind = ctrl+super+equal=increase_font_size:1
 keybind = ctrl+super+minus=decrease_font_size:1
 keybind = ctrl+super+0=reset_font_size
