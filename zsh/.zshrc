@@ -28,6 +28,8 @@ if (( $+commands[zoxide] )); then
 fi
 alias v=nvim
 alias lg=lazygit
+alias cx=codex
+alias cl=claude
 if (( $+commands[eza] )); then
   alias ls="eza --color=always --git --icons=always --long --no-filesize --no-time --no-user --no-permissions -I '__pycache__'"
 fi
