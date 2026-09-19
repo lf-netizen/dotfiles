@@ -11,6 +11,26 @@ Reproduced 2026-09-07 with installed WezTerm
 
 ## Current bindings (2026-09-18)
 
+### Shared editor/pane controls (2026-09-19)
+
+Ctrl+arrows navigate Neovim windows or Herdr panes. Ctrl+Shift+Alt+arrows
+(and H/J/K/L aliases) resize both. `herdr/splits.py` queries the foreground
+process and forwards the arrow chord to Neovim, or operates on the explicit
+Herdr pane. Plain Ctrl+H/J/K/L remain application-local. Ctrl+backslash/minus
+split Neovim right/below; adding Shift splits Herdr right/below.
+
+Current smart-splits master includes a native Herdr backend. Its resize
+amount is converted from integer editor steps to Herdr fractions: 3 becomes
+0.03, avoiding Herdr's 0.5 clamp. An isolated Herdr session verified editor
+focus, crossing the editor edge, editor resizing and a 3% outer-pane resize.
+Routing regression tests cover all directions and failed process detection.
+
+No enabled macOS symbolic hotkeys use arrows in the inspected preferences.
+Raycast's live mappings are encrypted, so physical-key collisions with its
+custom window-management shortcuts remain unverified. Ghostty font bindings
+are unchanged; the user reports that they do not work with physical input,
+despite the older synthetic-event results below.
+
 Herdr accepts both Ctrl+Shift+comma/period and Ctrl+Shift+[/] for tabs.
 WezTerm explicitly sends Kitty sequences for all four keys, plus Ctrl+Shift+6
 (agent 6) and Ctrl+Shift+9 (last local agent).
@@ -176,3 +196,13 @@ Karabiner interception. The deployed Karabiner rules now include Ghostty for
 both left and right Cmd/Ctrl swaps; physical right-side behavior still needs
 daily-use confirmation. Screen capture was blocked by macOS permissions, so
 appearance was configured from WezTerm's settings, not visually certified.
+
+### Neovim Ctrl+Tab
+
+Ghostty explicitly sends `CSI 9;5u` for Ctrl+Tab. Tested passing this sequence through an isolated Herdr client into Neovim: it toggles the alternate buffer. Reload Ghostty configuration after changing the binding; the physical macOS/Karabiner shortcut still needs an interactive check.
+
+### Shared navigation and resize commands
+
+Herdr custom shortcuts supply `HERDR_ACTIVE_PANE_ID`, not the child-process variable `HERDR_PANE_ID`. The split helper uses the active ID; using the other variable made navigation and resize fail silently. Regression checks include a stale child-process ID to ensure the active pane wins. An isolated Herdr client verified navigation and resizing in Neovim and shell panes. Ghostty explicitly forwards Ctrl+arrows and Ctrl+Shift+Alt+arrows/HJKL, preserving ordinary Option-letter composition. Reload Ghostty configuration after changing these bindings. Physical keys with the terminal Karabiner swap: Command+arrows to navigate; Command+Shift+Option+arrows/HJKL to resize.
+
+Ctrl+Shift+arrows also use the shared split helper, rather than Herdr direct-focus actions. The same chord moves within Neovim, crosses into an adjacent Herdr pane at the editor edge, and returns from a shell pane. Verified through an isolated Herdr client. Physical chord after Karabiner: Command+Shift+arrows.

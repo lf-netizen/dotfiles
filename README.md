@@ -18,9 +18,8 @@ and application-owned runtime data; it is not another dotfiles repository.
 | `scripts` | Deployment, export/rollback, and integration/extension setup |
 | `docs` | Known issues and historical migration records |
 
-`symlinks.conf` is the deployment manifest. Neovim imports both `plugins/core`
-and `plugins/addons`; those files are active even without individual `require`
-statements. Old tmux, iTerm2, and Agent Deck configs live only in the private
+`symlinks.conf` is the deployment manifest. Neovim uses `lua/config` and flat `lua/plugins` specs; see the
+[editor guide](nvim/README.md). Old tmux, iTerm2, and Agent Deck configs live only in the private
 recovery archive. Ghostty now has a maintained trial configuration.
 
 Neovim is an ordinary tracked directory, **not a submodule**. Cloning needs no
@@ -44,9 +43,10 @@ The intentional Karabiner Cmd/Ctrl swap is unchanged.
 | Alt+Space / Alt+Tab | Raycast / AltTab window cycling |
 | Alt+J / T / W / I | Zen / WezTerm / Obsidian / VS Code |
 | Alt+P / V / R | Window search / clipboard history / FluidVoice |
-| Ctrl+Shift+arrows | Focus Herdr pane |
-| Ctrl+Shift+Alt+arrows | Resize Herdr pane |
-| Ctrl+Shift+D / E | Split right / down |
+| Ctrl+Shift+arrows or Ctrl+arrows | Focus Neovim split, then Herdr pane at the editor edge |
+| Ctrl+Shift+Alt+arrows or H/J/K/L | Resize Neovim split or Herdr pane |
+| Ctrl+Shift+backslash / minus | Split Herdr right / below; Ctrl alone splits Neovim |
+| Ctrl+Shift+D / E | Additional Herdr split right / below aliases |
 | Ctrl+Shift+T / , / . | New / previous / next tab |
 | Ctrl+Shift+[ / ] | Previous / next tab (alternatives) |
 | Ctrl+Shift+R | Rename the current tab/task |
@@ -68,7 +68,8 @@ The intentional Karabiner Cmd/Ctrl swap is unchanged.
 Copy mode: `/` searches, `n` repeats, h/j/k/l moves, v starts a selection,
 y copies, Esc clears/exits. Tab switching uses Ctrl+Shift+comma / period or [ / ];
 WezTerm forwards these as explicit Kitty key sequences; Ghostty encodes them natively.
-The former U/I tab bindings are removed. Ctrl+Shift+- is free.
+Ctrl+Shift+- splits below. Shared split keys use `herdr/splits.py` to route
+to Neovim when it is focused; plain Ctrl+H/J/K/L remain local to each application.
 See [keyboard findings](docs/keyboard-issues.md).
 Reserve Alt+A/C/E/L/N/O/S/X/Z and shifted variants for Polish letters.
 
@@ -132,7 +133,7 @@ Ghostty has no WezTerm-style per-image HSB transform. Its tracked wallpaper is
 preprocessed from the original with saturation zero and brightness halved in
 linear RGB; Ghostty mixes it 50/50 with the theme background (`#1f1f28` for
 Kanagawa Wave) without desktop transparency.
-Regenerate it after changing the original (ImageMagick is needed only for this):
+Regenerate it after changing the original (ImageMagick is needed for this and Neovim image previews):
 
 ```sh
 magick img/background.jpeg -colorspace RGB -fx 'max(r,max(g,b))*0.5' \
@@ -205,7 +206,7 @@ Run `bat cache --build` after deploying its theme. Open Neovim once to let lazy.
 install the locked plugins. Review `:checkhealth` for language tools you use.
 
 Release checks: `python3 scripts/test_deploy.py`, `zsh -n zsh/.zshrc`,
-`herdr config check`, `wezterm show-keys --lua`, and
+`python3 scripts/test_splits.py`, `herdr config check`, `wezterm show-keys --lua`, and
 `/Applications/Ghostty.app/Contents/MacOS/ghostty +validate-config`.
 The known WezTerm numbered-key and bracket issues remain documented; Ghostty
 uses native Kitty encoding rather than carrying those workarounds over.

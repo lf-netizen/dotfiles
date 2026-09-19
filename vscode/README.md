@@ -5,7 +5,7 @@ intentional Ctrl-based app shortcuts, relative line numbers, Kanagawa, format on
 save, Python/Jupyter settings, and Harpoon. No new keybindings are introduced.
 
 Vim editing uses **asvetliakov.vscode-neovim**, backed by the repository's existing
-`nvim/init.lua` and its `vim.g.vscode` branch in `nvim/lua/vsc.lua`. VSCodeVim is
+`nvim/init.lua` and its `vim.g.vscode` branch in `nvim/lua/config/vscode.lua`. VSCodeVim is
 explicitly disabled in these settings so two Vim engines do not compete. The
 Neovim executable is discovered as `nvim` on PATH, without a username or CPU-specific
 Homebrew path. Keep Neovim and the existing JetBrains Mono / MesloLGS NF fonts

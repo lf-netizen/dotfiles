@@ -35,8 +35,26 @@ keybind = clear
 keybind = ctrl+q=quit
 keybind = ctrl+shift+v=paste_from_clipboard
 # Send the exact modified-key sequences accepted by Herdr 0.9.1.
+keybind = ctrl+tab=csi:9;5u
 keybind = ctrl+shift+tab=csi:9;6u
 keybind = ctrl+shift+o=csi:111;6u
+# Shared pane controls; keep Option text composition for other shortcuts.
+keybind = ctrl+left=csi:1;5D
+keybind = ctrl+shift+left=csi:1;6D
+keybind = ctrl+shift+alt+left=csi:1;8D
+keybind = ctrl+down=csi:1;5B
+keybind = ctrl+shift+down=csi:1;6B
+keybind = ctrl+shift+alt+down=csi:1;8B
+keybind = ctrl+up=csi:1;5A
+keybind = ctrl+shift+up=csi:1;6A
+keybind = ctrl+shift+alt+up=csi:1;8A
+keybind = ctrl+right=csi:1;5C
+keybind = ctrl+shift+right=csi:1;6C
+keybind = ctrl+shift+alt+right=csi:1;8C
+keybind = ctrl+shift+alt+h=csi:104;8u
+keybind = ctrl+shift+alt+j=csi:106;8u
+keybind = ctrl+shift+alt+k=csi:107;8u
+keybind = ctrl+shift+alt+l=csi:108;8u
 keybind = ctrl+super+equal=increase_font_size:1
 keybind = ctrl+super+minus=decrease_font_size:1
 keybind = ctrl+super+0=reset_font_size

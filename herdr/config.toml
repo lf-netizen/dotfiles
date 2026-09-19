@@ -31,18 +31,99 @@ next_agent = "ctrl+shift+j"
 focus_agent = ["ctrl+shift+1", "ctrl+shift+2", "ctrl+shift+3", "ctrl+shift+4", "ctrl+shift+5", "ctrl+shift+6", "ctrl+shift+7", "ctrl+shift+8"]
 last_pane = "ctrl+shift+tab"
 close_pane = ["ctrl+shift+w", "prefix+x"]
-focus_pane_left = ["ctrl+shift+left", "prefix+h"]
-focus_pane_down = ["ctrl+shift+down", "prefix+j"]
-focus_pane_up = ["ctrl+shift+up", "prefix+k"]
-focus_pane_right = ["ctrl+shift+right", "prefix+l"]
-resize_pane_left = "ctrl+shift+alt+left"
-resize_pane_down = "ctrl+shift+alt+down"
-resize_pane_up = "ctrl+shift+alt+up"
-resize_pane_right = "ctrl+shift+alt+right"
-split_vertical = ["ctrl+shift+d", "prefix+v"]
-split_horizontal = ["ctrl+shift+e", "prefix+minus"]
+focus_pane_left = ["prefix+h"]
+focus_pane_down = ["prefix+j"]
+focus_pane_up = ["prefix+k"]
+focus_pane_right = ["prefix+l"]
+# Shared resize chords are routed below, so Neovim can handle its own splits.
+resize_pane_left = []
+resize_pane_down = []
+resize_pane_up = []
+resize_pane_right = []
+split_vertical = ["ctrl+shift+backslash", "ctrl+shift+d", "prefix+v"]
+split_horizontal = ["ctrl+shift+minus", "ctrl+shift+e", "prefix+minus"]
 zoom = ["ctrl+shift+z", "prefix+z"]
 copy_mode = ["ctrl+shift+c", "prefix+["]
+
+[[keys.command]]
+key = "ctrl+left"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" focus left'
+
+[[keys.command]]
+key = "ctrl+shift+left"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" focus left'
+
+[[keys.command]]
+key = "ctrl+down"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" focus down'
+
+[[keys.command]]
+key = "ctrl+shift+down"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" focus down'
+
+[[keys.command]]
+key = "ctrl+up"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" focus up'
+
+[[keys.command]]
+key = "ctrl+shift+up"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" focus up'
+
+[[keys.command]]
+key = "ctrl+right"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" focus right'
+
+[[keys.command]]
+key = "ctrl+shift+right"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" focus right'
+
+[[keys.command]]
+key = "ctrl+shift+alt+left"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" resize left'
+
+[[keys.command]]
+key = "ctrl+shift+alt+down"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" resize down'
+
+[[keys.command]]
+key = "ctrl+shift+alt+up"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" resize up'
+
+[[keys.command]]
+key = "ctrl+shift+alt+right"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" resize right'
+
+[[keys.command]]
+key = "ctrl+shift+alt+h"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" resize left'
+
+[[keys.command]]
+key = "ctrl+shift+alt+j"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" resize down'
+
+[[keys.command]]
+key = "ctrl+shift+alt+k"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" resize up'
+
+[[keys.command]]
+key = "ctrl+shift+alt+l"
+type = "shell"
+command = 'python3 "$HOME/.config/herdr/splits.py" resize right'
 
 [[keys.command]]
 key = "ctrl+shift+9"
