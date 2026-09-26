@@ -31,7 +31,7 @@ custom window-management shortcuts remain unverified. Ghostty font bindings
 are unchanged; the user reports that they do not work with physical input,
 despite the older synthetic-event results below.
 
-Herdr accepts both Ctrl+Shift+comma/period and Ctrl+Shift+[/] for tabs.
+Herdr accepts both Ctrl+Shift+comma/period and Ctrl+Shift+[/] for workspaces.
 WezTerm explicitly sends Kitty sequences for all four keys, plus Ctrl+Shift+6
 (agent 6) and Ctrl+Shift+9 (last local agent).
 Ghostty uses its native encoding. Agent-number bindings remain on 1–8;
@@ -122,8 +122,8 @@ Regression coverage should include key-down and key-up for 1–9 and brackets,
 flags 7 and 31, and Polish Option-letter composition. Changing the initial
 plain-text check alone is insufficient for the bracket key identity issue.
 
-Current usable navigation: Ctrl+Shift+J/K for agents, H/L for workspaces,
-comma/period for tabs, Ctrl+Shift+P navigator, and Ctrl+Cmd+1–9 for workspaces.
+Current usable navigation: Ctrl+Shift+J/K for agents, H/L for tabs,
+comma/period or brackets for workspaces, Ctrl+Shift+P navigator, and Ctrl+Cmd+1–9 for workspaces.
 Ctrl+Shift+1–9 is still configured for agents but is affected by this bug.
 
 ### Comma/period tab navigation workaround

@@ -47,11 +47,11 @@ The intentional Karabiner Cmd/Ctrl swap is unchanged.
 | Ctrl+Shift+Alt+arrows or H/J/K/L | Resize Neovim split or Herdr pane |
 | Ctrl+Shift+backslash / minus | Split Herdr right / below; Ctrl alone splits Neovim |
 | Ctrl+Shift+D / E | Additional Herdr split right / below aliases |
-| Ctrl+Shift+T / , / . | New / previous / next tab |
-| Ctrl+Shift+[ / ] | Previous / next tab (alternatives) |
+| Ctrl+Shift+T | New tab |
+| Ctrl+Shift+H / L | Previous / next tab |
 | Ctrl+Shift+R | Rename the current tab/task |
 | Ctrl+Shift+N | Name and create a workspace |
-| Ctrl+Shift+H / L | Previous / next workspace |
+| Ctrl+Shift+, / . or [ / ] | Previous / next workspace |
 | Ctrl+Shift+K / J | Previous / next agent |
 | Ctrl+Cmd+1–9 | Jump to workspace 1–9 |
 | Ctrl+Shift+1–8 | Jump to agent by number; affected by the known WezTerm input bug |
@@ -66,7 +66,7 @@ The intentional Karabiner Cmd/Ctrl swap is unchanged.
 | Ctrl+B, then ? | Herdr's native help and fallback bindings |
 
 Copy mode: `/` searches, `n` repeats, h/j/k/l moves, v starts a selection,
-y copies, Esc clears/exits. Tab switching uses Ctrl+Shift+comma / period or [ / ];
+y copies, Esc clears/exits. Workspace switching uses Ctrl+Shift+comma / period or [ / ];
 WezTerm forwards these as explicit Kitty key sequences; Ghostty encodes them natively.
 Ctrl+Shift+- splits below. Shared split keys use `herdr/splits.py` to route
 to Neovim when it is focused; plain Ctrl+H/J/K/L remain local to each application.
