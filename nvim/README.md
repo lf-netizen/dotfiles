@@ -28,6 +28,8 @@ Extra textobjects use the various-textobjs defaults: `ii`/`ai` indentation, `iq`
 
 Snacks image displays image files and inline images in supported documents, including Markdown. ImageMagick (`brew install imagemagick`) handles JPEG and other conversions; it is already installed on this machine. Open an image normally or use `:lua Snacks.image.hover()` over an image link for a floating preview. Herdr 0.9.1 identifies as libghostty, which Snacks automatically recognizes as supporting graphics and Unicode placeholders; no environment override is needed. Use `:checkhealth snacks` for diagnostics. PDF, video, math and Mermaid conversions can require additional tools.
 
+Markdown uses Marksman for heading outlines (`Space cS`), symbol search (`Space ss`), and link navigation.
+
 Python uses ty and Ruff; TypeScript/JavaScript use vtsls and, in configured projects, Biome. Lua uses lua_ls with lazydev. Project-local executables take priority. Conform formats on save with Ruff, StyLua or Biome. Biome is only used where a project configuration exists.
 
 ## Review

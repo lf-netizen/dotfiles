@@ -13,7 +13,7 @@ return {
     config = function()
       require('config.diagnostics').setup()
       require('mason-tool-installer').setup({
-        ensure_installed = { 'ty', 'ruff', 'lua-language-server', 'vtsls', 'biome', 'stylua' },
+        ensure_installed = { 'ty', 'ruff', 'lua-language-server', 'vtsls', 'biome', 'stylua', 'marksman' },
       })
       local project = require('config.project')
       local servers = {
@@ -30,6 +30,7 @@ return {
         },
         vtsls = {},
         biome = {},
+        marksman = {},
       }
       vim.lsp.config('*', { capabilities = require('blink.cmp').get_lsp_capabilities() })
 
