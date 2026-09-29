@@ -27,7 +27,14 @@ return {
 
     opts = {
       keymaps = {
-        view = { toggle_stage = false, stage_hunk = false, unstage_hunk = false, discard_hunk = false },
+        view = {
+          next_file = '<S-l>',
+          prev_file = '<S-h>',
+          toggle_stage = false,
+          stage_hunk = false,
+          unstage_hunk = false,
+          discard_hunk = false,
+        },
         explorer = { stage_all = false, unstage_all = false, restore = false },
       },
     },
