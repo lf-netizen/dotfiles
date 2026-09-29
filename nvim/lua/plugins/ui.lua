@@ -27,6 +27,7 @@ return {
           SnacksIndent = { fg = '#66667E', bg = 'none', italic = false, bold = false, nocombine = true },
           SnacksIndentBlank = { link = 'SnacksIndent' },
           SnacksIndentScope = { fg = '#9A9AB4', bg = 'none', italic = false, bold = false, nocombine = true },
+          SnacksPickerDir = { fg = '#7C7C99' },
         }
       end,
     },
